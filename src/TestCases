@@ -1,0 +1,141 @@
+#1 Add new customer
+
+Pre:
+Open https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login
+Check Redirect to Login Page
+
+STR:
+Click on 'Bank Manager Login'
+Click on 'Add Customer'
+Enter First Name_1, Last Name, PostCode
+Click on 'Add customer'
+Check successful message
+Go to Customers
+Check created user
+
+ER:
+User should created successfully and visible in list of customers
+
+Post:
+Go to Customers
+Click on Delete near created user
+
+____________________________________________________________________________
+
+#2 Add new account for created customer
+
+Pre:
+Open https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login
+Check Redirect to Login Page
+Create customer_1
+
+STR:
+Click on 'Bank Manager Login'
+Click on 'Open Account'
+Select customer_1 in customers dropDown list
+Select currency_1 in currency dropDown list
+Click on Process
+Check in message Account Number
+Go to Customers
+Check Account Number of customer_1
+
+ER:
+Customer_1 should have Account Number the same as from chrome message
+
+Post:
+Go to Customers
+Click on Delete near customer_1
+
+____________________________________________________________________________
+
+#3 Add Deposit for Account Number of new customer
+
+Pre:
+Open https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login
+Check Redirect to Login Page
+Customer_1 with Account_1 created
+
+STR:
+Click on CustomerLogin
+Select customer_1 in dropDown list
+Click on Login
+Go to Deposit
+Set amount - 100
+Click on Deposit
+Go to Transactions
+Check last deposit
+
+ER: Deposit with amount 100 should be in list of Transaction
+
+Post:
+Go to Customers
+Click on Delete near customer_1
+
+____________________________________________________________________________
+
+#4 Check error message for Withdraw
+
+Pre:
+Open https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login
+Check Redirect to Login Page
+Customer_1 with Account_1 created
+
+STR:
+Click on CustomerLogin
+Select customer_1 in dropDown list
+Click on Login
+Go to Deposit
+Set amount - 100
+Click on Deposit
+Go to Withdrawl
+Set amount - 101
+Click on Withdraw
+Check error message
+
+ER: Message should appear and contain text:
+'Transaction Failed. You can not withdraw amount more than the balance.'
+
+Post:
+Go to Customers
+Click on Delete near customer_1
+
+____________________________________________________________________________
+
+#5 Withdraw all money from different account of on customer
+
+Pre:
+Open https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login
+Check Redirect to Login Page
+Customer_1 with
+dolar_account with 100 dolars
+pound_account with 200 punds
+rupee_account with 300 rupies
+
+STR:
+Click on CustomerLogin
+Select customer_1 in dropDown list
+Click on Login
+Select dolar_account in dropdown
+Go to Withdrawl
+Set amount that equal to balance
+Click on Withdraw
+Check that account have 0 balance
+
+Select pound_account in dropdown
+Go to Withdrawl
+Set amount that equal to balance
+Click on Withdraw
+Check that account have 0 balance
+
+Select rupee_account in dropdown
+Go to Withdrawl
+Set amount that equal to balance
+Click on Withdraw
+Check that account have 0 balance
+
+
+
+
+ER:
+
+Post:

@@ -1,0 +1,62 @@
+#Login Page
+LoginPage.CustomerLoginButton = .//button[text()='Customer Login']
+LoginPage.BankManagerLoginButton = .//button[text()='Bank Manager Login']
+
+#Header
+Header.HomeButton = .//button[text()='Home']
+Header.LogOutButton = .//button[text()='Logout']
+
+#Manager Page
+Manager.AddCustomerButton= .//button[@ng-class='btnClass1']
+Manager.AddOpenAccount= .//button[@ng-class='btnClass2']
+Manager.CustomersButton= .//button[@ng-class='btnClass3']
+
+#AddCustomer
+AddCustomer.FirsNameInput =  .//input[@placeholder='First Name']
+AddCustomer.LastNameInput =  .//input[@placeholder='Last Name']
+AddCustomer.PostInput =  .//input[@placeholder='Post Code']
+AddCustomer.AddCustomerButton = .//button[@type='submit']
+
+#Customers
+Customers.CustomerNameInList = .//td[text()='NAME']
+Customers.SearchCustomerInput = .//input[@placeholder='Search Customer']
+Customers.DeleteButtonCustomerWithName = //table[@class='table table-bordered table-striped']//tr[.//td[contains(text(),'NAME')]]//td[5]//button[text() = 'Delete']
+Customers.AccountNumberCustomerWithName = //table[@class='table table-bordered table-striped']//tr[.//td[contains(text(),'NAME')]]//td[4]//span[@class = 'ng-binding ng-scope']
+
+#OpenAccount
+OpenAccount.CustomersDropDown = .//*[@id = 'userSelect']
+OpenAccount.CurrencyDropDown = .//*[@id = 'currency']
+AddCustomer.ProcessButton = .//button[@type='submit']
+
+#Customer
+Customer.CustomersDropDown = .//*[@id = 'userSelect']
+AddCustomer.AddCustomerButton = .//button[@type='submit']
+
+#Account
+Account.AccountDropDown = .//*[@id = 'accountSelect']
+Account.TransactionButton = .//button[@ng-click='transactions()']
+Account.DepositButton = .//button[@ng-click='deposit()']
+Account.WithdrawlButton = .//button[@ng-click='withdrawl()']
+
+#Transaction
+Transaction.DepositAmountData = //table[@class='table table-bordered table-striped']//tr[.//td[contains(text(),'Debit')]]//td[2]
+Transaction.CreditAmountData = //table[@class='table table-bordered table-striped']//tr[.//td[contains(text(),'Credit')]]//td[2]
+Transaction.BackButton = .//button[text()='Back']
+
+#Deposit
+Deposit.Amount = .//input[@placeholder='amount']
+Deposit.DepositButton = .//button[@type='submit']
+Deposit.SuccessfulMessage = .//span[text()='Deposit Successful']
+
+#Withdrawl
+Withdrawl.Amount = .//input[@placeholder='amount']
+Withdrawl.WithdrawButton = .//button[@type='submit']
+Withdrawl.SuccessfulMessage = .//span[text()='Transaction successful']
+Withdrawl.ErrorMessage = .//span[text()='Transaction Failed. You can not withdraw amount more than the balance.']
+
+
+
+
+
+
+

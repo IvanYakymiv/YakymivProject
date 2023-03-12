@@ -2,12 +2,13 @@ package pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.Alert;
+
 
 import java.time.Duration;
 
@@ -50,13 +51,25 @@ public class ActionsWithElement {
         }
     }
 
-    private String getElementName(WebElement webElement){
+    protected String getElementName(WebElement webElement) {
         try {
             return webElement.getAccessibleName();
-        }catch (Exception e){
+        } catch (Exception e) {
             return "";
         }
     }
+
+    protected void getTextFromAlertAndClickOK(WebDriver webDriver) {
+        try {
+            webDriverWait15.until(ExpectedConditions.alertIsPresent());
+            Alert alert = webDriver.switchTo().alert();
+            logger.info(alert.getText());
+            alert.accept();
+        } catch (Exception e) {
+            printErrorAndStop(e);
+        }
+    }
+
 
 //    protected void clickOnElement(String xpath) {
 //        try {

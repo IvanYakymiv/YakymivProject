@@ -2,6 +2,7 @@ package ManagerTest;
 
 import BaseTest.BaseTest;
 import libs.Util;
+import org.junit.After;
 import org.junit.Test;
 
 public class CreateCustomerTest extends BaseTest {
@@ -9,8 +10,9 @@ public class CreateCustomerTest extends BaseTest {
     final String LAST_NAME = "Ivan";
     final String POST_CODE = Util.getDateAndTimeFormatted();
 
+
     @Test
-    public void createCustomer(){
+    public void createCustomer() {
         loginPage.openLoginPage()
                 .clickOnBankManagerLogin()
                 .clickOnAddCustomer()
@@ -18,9 +20,23 @@ public class CreateCustomerTest extends BaseTest {
                 .enterTextToLastNameInput(LAST_NAME)
                 .enterTextToPostCodeInput(POST_CODE)
                 .clickOnAddCustomer()
+                .clickOnCustomers()
+                .enterTextInSearch(POST_CODE)
+                .checkAccountWasCreated(POST_CODE)
+//                .getTextFromAlert()
 
 
         ;
 
+    }
+
+    @After
+    public void After() {
+        loginPage.openLoginPage()
+                .clickOnBankManagerLogin()
+                .clickOnAddCustomer()
+                .clickOnCustomers()
+                .enterTextInSearch(POST_CODE)
+                .deleteAccountWithPostCode(POST_CODE);
     }
 }

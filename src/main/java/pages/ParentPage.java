@@ -1,14 +1,13 @@
 package pages;
 
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
-public class ParentPage {
-    WebDriver webDriver;
-    protected Logger logger = Logger.getLogger(getClass());
+public class ParentPage extends ActionsWithElement{
+
 
     public ParentPage(WebDriver webDriver) {
-        this.webDriver = webDriver;
-
+        super(webDriver);
     }
 }

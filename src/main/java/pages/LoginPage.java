@@ -2,9 +2,17 @@ package pages;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends ParentPage{
     protected String base_url = "https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login";
+
+    @FindBy(xpath = ".//button[text()='Bank Manager Login']")
+    private WebElement bankManagerLoginButton;
+
+    @FindBy(xpath = ".//button[text()='Customer Login']")
+    private WebElement customerLoginButton;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
@@ -14,11 +22,20 @@ public class LoginPage extends ParentPage{
         try {
             webDriver.get(base_url);
             logger.info("LoginPage was opened " + base_url);
-        }catch (Exception e){
-            logger.error("Can not open page");
-            Assert.fail("Can not open page");
+        } catch (Exception e){
+            printErrorAndStop(e);
         }
         return new LoginPage(webDriver);
+    }
+
+    public ManagerPage clickOnBankManagerLogin(){
+        clickOnElement(bankManagerLoginButton);
+        return new ManagerPage(webDriver);
+    }
+
+    public CustomerPage clickOnCustomerLoginButton(){
+        clickOnElement(customerLoginButton);
+        return new CustomerPage(webDriver);
     }
 
 }

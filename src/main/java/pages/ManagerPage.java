@@ -9,6 +9,9 @@ public class ManagerPage extends ParentPage{
     @FindBy(xpath = ".//button[@ng-class='btnClass1']")
     public WebElement addCustomerButton;
 
+    @FindBy(xpath = ".//button[@ng-class='btnClass2']")
+    public WebElement openAccountButton;
+
     public ManagerPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -19,4 +22,8 @@ public class ManagerPage extends ParentPage{
     }
 
 
+    public OpenAccountPage clickOnOpenAccount() {
+        clickOnElement(openAccountButton);
+        return new OpenAccountPage(webDriver);
+    }
 }

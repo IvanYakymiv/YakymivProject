@@ -5,7 +5,7 @@ import libs.Util;
 import org.junit.After;
 import org.junit.Test;
 
-public class CreateCustomerTest extends BaseTest {
+public class TC1_CreateCustomerTest extends BaseTest {
     final String FIRST_NAME = "Ivan";
     final String LAST_NAME = "Ivan";
     final String POST_CODE = Util.getDateAndTimeFormatted();
@@ -24,8 +24,6 @@ public class CreateCustomerTest extends BaseTest {
                 .enterTextInSearch(POST_CODE)
                 .checkAccountWasCreated(POST_CODE)
 //                .getTextFromAlert()
-
-
         ;
 
     }

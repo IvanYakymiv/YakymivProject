@@ -30,7 +30,7 @@ AddCustomer.ProcessButton = .//button[@type='submit']
 
 #Customer
 Customer.CustomersDropDown = .//*[@id = 'userSelect']
-AddCustomer.AddCustomerButton = .//button[@type='submit']
+AddCustomer.LoginButton = .//button[@type='submit']
 
 #Account
 Account.AccountDropDown = .//*[@id = 'accountSelect']

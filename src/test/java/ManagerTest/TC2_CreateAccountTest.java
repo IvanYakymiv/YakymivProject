@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class TC2_CreateAccountTest extends BaseTest {
 
-    final String FIRST_NAME = "Ivan" + Util.getDateAndTimeFormatted();;
+    final String FIRST_NAME = "Ivan" + Util.getDateAndTimeFormatted();
     final String LAST_NAME = "Ivan";
     final String POST_CODE = Util.getDateAndTimeFormatted();
     final String CURRENCY = "Dollar";
@@ -18,41 +18,44 @@ public class TC2_CreateAccountTest extends BaseTest {
     public void Before() {
         loginPage.openLoginPage()
                 .clickOnBankManagerLogin()
+                .checkIsRedirectManagerPage()
                 .clickOnAddCustomer()
+                .checkIsRedirectAddCustomerPage()
                 .enterTextToFirstNameInput(FIRST_NAME)
                 .enterTextToLastNameInput(LAST_NAME)
                 .enterTextToPostCodeInput(POST_CODE)
                 .clickOnAddCustomerSubmit()
                 .clickOnCustomers()
+                .checkIsRedirectCustomersPage()
                 .enterTextInSearch(POST_CODE)
-                .checkAccountWasCreated(POST_CODE)
-//                .getTextFromAlert()
-        ;
-
+                .checkCustomerWasCreated(POST_CODE);
     }
 
     @Test
-    public void createAccount(){
+    public void createAccount() {
         loginPage.openLoginPage()
                 .clickOnBankManagerLogin()
+                .checkIsRedirectManagerPage()
                 .clickOnOpenAccount()
+                .checkIsRedirectOpenAccountPage()
                 .selectNameOfCustomerInDD(FIRST_NAME)
                 .selectCurrencyInDD(CURRENCY)
                 .clickOnProcessButton()
-
-                ;
-
-
+                .clickOnCustomers()
+                .enterTextInSearch(POST_CODE)
+                .checkAccountWasCreated(FIRST_NAME);
     }
 
     @After
     public void After() {
         loginPage.openLoginPage()
                 .clickOnBankManagerLogin()
-                .clickOnAddCustomer()
+                .checkIsRedirectManagerPage()
                 .clickOnCustomers()
+                .checkIsRedirectCustomersPage()
                 .enterTextInSearch(POST_CODE)
-                .deleteAccountWithPostCode(POST_CODE);
+                .deleteAccountWithPostCode(POST_CODE)
+                .checkCustomerWasDeleted(POST_CODE);
     }
 }
 

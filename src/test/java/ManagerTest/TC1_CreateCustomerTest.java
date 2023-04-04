@@ -26,10 +26,7 @@ public class TC1_CreateCustomerTest extends BaseTest {
                 .clickOnCustomers()
                 .checkIsRedirectCustomersPage()
                 .enterTextInSearch(POST_CODE)
-                .checkAccountWasCreated(POST_CODE)
-
-        ;
-
+                .checkCustomerWasCreated(POST_CODE);
     }
 
     @After
@@ -41,6 +38,6 @@ public class TC1_CreateCustomerTest extends BaseTest {
                 .checkIsRedirectCustomersPage()
                 .enterTextInSearch(POST_CODE)
                 .deleteAccountWithPostCode(POST_CODE)
-                .checkAccountWasDeleted(POST_CODE);
+                .checkCustomerWasDeleted(POST_CODE);
     }
 }

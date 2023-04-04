@@ -26,7 +26,7 @@ public class TC4_ErrorWithdrawTest extends BaseTest {
                 .clickOnAddCustomerSubmit()
                 .clickOnCustomers()
                 .enterTextInSearch(POST_CODE)
-                .checkAccountWasCreated(POST_CODE);
+                .checkCustomerWasCreated(POST_CODE);
         loginPage.openLoginPage()
                 .clickOnBankManagerLogin()
                 .clickOnOpenAccount()

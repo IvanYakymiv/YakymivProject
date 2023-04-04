@@ -16,23 +16,11 @@ public class TC2_CreateAccountTest extends BaseTest {
 
     @Before
     public void Before() {
-        loginPage.openLoginPage()
-                .clickOnBankManagerLogin()
-                .checkIsRedirectManagerPage()
-                .clickOnAddCustomer()
-                .checkIsRedirectAddCustomerPage()
-                .enterTextToFirstNameInput(FIRST_NAME)
-                .enterTextToLastNameInput(LAST_NAME)
-                .enterTextToPostCodeInput(POST_CODE)
-                .clickOnAddCustomerSubmit()
-                .clickOnCustomers()
-                .checkIsRedirectCustomersPage()
-                .enterTextInSearch(POST_CODE)
-                .checkCustomerWasCreated(POST_CODE);
+        createCustomer(FIRST_NAME, LAST_NAME, POST_CODE);
     }
 
     @Test
-    public void createAccount() {
+    public void createAccountTest() {
         loginPage.openLoginPage()
                 .clickOnBankManagerLogin()
                 .checkIsRedirectManagerPage()
@@ -48,14 +36,7 @@ public class TC2_CreateAccountTest extends BaseTest {
 
     @After
     public void After() {
-        loginPage.openLoginPage()
-                .clickOnBankManagerLogin()
-                .checkIsRedirectManagerPage()
-                .clickOnCustomers()
-                .checkIsRedirectCustomersPage()
-                .enterTextInSearch(POST_CODE)
-                .deleteAccountWithPostCode(POST_CODE)
-                .checkCustomerWasDeleted(POST_CODE);
+        deleteCustomer(POST_CODE);
     }
 }
 

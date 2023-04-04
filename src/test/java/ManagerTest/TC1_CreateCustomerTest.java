@@ -13,7 +13,7 @@ public class TC1_CreateCustomerTest extends BaseTest {
 
 
     @Test
-    public void createCustomer() {
+    public void createCustomerTest() {
         loginPage.openLoginPage()
                 .clickOnBankManagerLogin()
                 .checkIsRedirectManagerPage()

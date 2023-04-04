@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class TC3_CreateDepositTest extends BaseTest {
 
-    final String FIRST_NAME = "Ivan";
+    final String FIRST_NAME = "Ivan" + Util.getDateAndTimeFormatted();
     final String LAST_NAME = "Ivan";
     final String POST_CODE = Util.getDateAndTimeFormatted();
     final String CURRENCY = "Dollar";
@@ -16,28 +16,14 @@ public class TC3_CreateDepositTest extends BaseTest {
 
 
     @Before
-    public void Before(){
-        loginPage.openLoginPage()
-                .clickOnBankManagerLogin()
-                .clickOnAddCustomer()
-                .enterTextToFirstNameInput(FIRST_NAME)
-                .enterTextToLastNameInput(LAST_NAME)
-                .enterTextToPostCodeInput(POST_CODE)
-                .clickOnAddCustomerSubmit()
-                .clickOnCustomers()
-                .enterTextInSearch(POST_CODE)
-                .checkCustomerWasCreated(POST_CODE);
-        loginPage.openLoginPage()
-                .clickOnBankManagerLogin()
-                .clickOnOpenAccount()
-                .selectNameOfCustomerInDD(FIRST_NAME)
-                .selectCurrencyInDD(CURRENCY)
-                .clickOnProcessButton();
+    public void Before() {
+        createCustomer(FIRST_NAME, LAST_NAME, POST_CODE);
+        createAccount(FIRST_NAME, CURRENCY, POST_CODE);
     }
 
 
     @Test
-    public void createDeposit(){
+    public void createDepositTest() {
         loginPage.openLoginPage()
                 .clickOnCustomerLoginButton()
                 .selectCustomerNameFromDD(FIRST_NAME)
@@ -46,18 +32,12 @@ public class TC3_CreateDepositTest extends BaseTest {
                 .inputAmountOfDeposit(DEPOSIT)
                 .clickOnDepositButton()
                 .checkSuccessfulMessage()
-
-                ;
+        ;
     }
 
 
     @After
     public void After() {
-        loginPage.openLoginPage()
-                .clickOnBankManagerLogin()
-                .clickOnAddCustomer()
-                .clickOnCustomers()
-                .enterTextInSearch(POST_CODE)
-                .deleteAccountWithPostCode(POST_CODE);
+        deleteCustomer(POST_CODE);
     }
 }

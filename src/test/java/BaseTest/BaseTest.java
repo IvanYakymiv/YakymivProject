@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.rules.TestName;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import pages.LoginPage;
 
@@ -20,19 +19,19 @@ public class BaseTest {
     protected LoginPage loginPage;
 
     @Before
-    public void before(){
+    public void before() {
         logger.info("--------" + testName.getMethodName() + " was started--------");
 //        WebDriverManager.chromedriver().setup();
 //        webDriver = new ChromeDriver();
         WebDriverManager.edgedriver().setup();
-        webDriver=new EdgeDriver();
+        webDriver = new EdgeDriver();
         webDriver.manage().window().maximize();
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         loginPage = new LoginPage(webDriver);
     }
 
     @After
-    public void after(){
+    public void after() {
         webDriver.quit();
         logger.info("Browser is closed");
 
@@ -41,4 +40,46 @@ public class BaseTest {
 
     @Rule
     public TestName testName = new TestName();
+
+    public void createCustomer(String firstName, String lastName, String postCode) {
+        loginPage.openLoginPage()
+                .clickOnBankManagerLogin()
+                .checkIsRedirectManagerPage()
+                .clickOnAddCustomer()
+                .checkIsRedirectAddCustomerPage()
+                .enterTextToFirstNameInput(firstName)
+                .enterTextToLastNameInput(lastName)
+                .enterTextToPostCodeInput(postCode)
+                .clickOnAddCustomerSubmit()
+                .clickOnCustomers()
+                .checkIsRedirectCustomersPage()
+                .enterTextInSearch(postCode)
+                .checkCustomerWasCreated(postCode);
+    }
+
+    public void deleteCustomer(String postCode) {
+        loginPage.openLoginPage()
+                .clickOnBankManagerLogin()
+                .checkIsRedirectManagerPage()
+                .clickOnCustomers()
+                .checkIsRedirectCustomersPage()
+                .enterTextInSearch(postCode)
+                .deleteAccountWithPostCode(postCode)
+                .checkCustomerWasDeleted(postCode);
+    }
+
+    public void createAccount(String firstName, String currency, String postCode) {
+        loginPage.openLoginPage()
+                .clickOnBankManagerLogin()
+                .checkIsRedirectManagerPage()
+                .clickOnOpenAccount()
+                .checkIsRedirectOpenAccountPage()
+                .selectNameOfCustomerInDD(firstName)
+                .selectCurrencyInDD(currency)
+                .clickOnProcessButton()
+                .clickOnCustomers()
+                .enterTextInSearch(postCode)
+                .checkAccountWasCreated(firstName);
+    }
 }
+

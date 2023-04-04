@@ -32,7 +32,8 @@ public class TC3_CreateDepositTest extends BaseTest {
                 .clickOnDepositButton()
                 .inputAmountOfDeposit(DEPOSIT)
                 .clickOnDepositButton()
-                .checkSuccessfulMessage();
+                .checkSuccessfulMessage()
+                .checkAccountBalance();
     }
 
 

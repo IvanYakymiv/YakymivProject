@@ -7,7 +7,7 @@ import pages.ActionsWithElement;
 import pages.LoginPage;
 
 public class HeaderElements extends ActionsWithElement {
-    @FindBy(xpath = ".//button[text()='Logout'")
+    @FindBy(xpath = ".//button[text()='Logout']")
     public WebElement logOutButton;
 
     @FindBy(xpath = ".//button[text()='Home']")

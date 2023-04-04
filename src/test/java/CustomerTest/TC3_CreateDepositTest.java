@@ -21,18 +21,18 @@ public class TC3_CreateDepositTest extends BaseTest {
         createAccount(FIRST_NAME, CURRENCY, POST_CODE);
     }
 
-
     @Test
     public void createDepositTest() {
         loginPage.openLoginPage()
                 .clickOnCustomerLoginButton()
+                .checkIsRedirectCustomerPage()
                 .selectCustomerNameFromDD(FIRST_NAME)
                 .clickOnLogin()
+                .checkIsCustomerLogIn(FIRST_NAME, LAST_NAME)
                 .clickOnDepositButton()
                 .inputAmountOfDeposit(DEPOSIT)
                 .clickOnDepositButton()
-                .checkSuccessfulMessage()
-        ;
+                .checkSuccessfulMessage();
     }
 
 

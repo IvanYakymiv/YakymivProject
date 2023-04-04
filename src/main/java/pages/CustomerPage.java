@@ -1,5 +1,6 @@
 package pages;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,7 +14,7 @@ public class CustomerPage extends ParentPage{
 
     @Override
     String getRelativeURL() {
-        return null;
+        return "/customer";
     }
 
     public CustomerPage(WebDriver webDriver) {
@@ -28,5 +29,11 @@ public class CustomerPage extends ParentPage{
     public AccountPage clickOnLogin(){
         clickOnElement(loginButton);
         return new AccountPage(webDriver);
+    }
+
+    public CustomerPage checkIsRedirectCustomerPage() {
+        Assert.assertTrue("Customer Page is not loaded", customersDropDown.isDisplayed());
+        checkUrl();
+        return this;
     }
 }

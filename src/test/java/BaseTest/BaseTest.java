@@ -81,5 +81,18 @@ public class BaseTest {
                 .enterTextInSearch(postCode)
                 .checkAccountWasCreated(firstName);
     }
+
+    public void createDeposit(String firstName, String lastName, String deposit) {
+        loginPage.openLoginPage()
+                .clickOnCustomerLoginButton()
+                .checkIsRedirectCustomerPage()
+                .selectCustomerNameFromDD(firstName)
+                .clickOnLogin()
+                .checkIsCustomerLogIn(firstName, lastName)
+                .clickOnDepositButton()
+                .inputAmountOfDeposit(deposit)
+                .clickOnDepositButton()
+                .checkSuccessfulMessage();
+    }
 }
 

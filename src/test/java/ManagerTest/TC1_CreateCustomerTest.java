@@ -6,7 +6,8 @@ import org.junit.After;
 import org.junit.Test;
 
 public class TC1_CreateCustomerTest extends BaseTest {
-    final String FIRST_NAME = "Ivan";
+    final String FIRST_NAME = "Ivan" + Util.getDateAndTimeFormatted();
+    ;
     final String LAST_NAME = "Ivan";
     final String POST_CODE = Util.getDateAndTimeFormatted();
 
@@ -15,15 +16,18 @@ public class TC1_CreateCustomerTest extends BaseTest {
     public void createCustomer() {
         loginPage.openLoginPage()
                 .clickOnBankManagerLogin()
+                .checkIsRedirectManagerPage()
                 .clickOnAddCustomer()
+                .checkIsRedirectAddCustomerPage()
                 .enterTextToFirstNameInput(FIRST_NAME)
                 .enterTextToLastNameInput(LAST_NAME)
                 .enterTextToPostCodeInput(POST_CODE)
-                .clickOnAddCustomer()
+                .clickOnAddCustomerSubmit()
                 .clickOnCustomers()
+                .checkIsRedirectCustomersPage()
                 .enterTextInSearch(POST_CODE)
                 .checkAccountWasCreated(POST_CODE)
-//                .getTextFromAlert()
+
         ;
 
     }
@@ -32,9 +36,11 @@ public class TC1_CreateCustomerTest extends BaseTest {
     public void After() {
         loginPage.openLoginPage()
                 .clickOnBankManagerLogin()
-                .clickOnAddCustomer()
+                .checkIsRedirectManagerPage()
                 .clickOnCustomers()
+                .checkIsRedirectCustomersPage()
                 .enterTextInSearch(POST_CODE)
-                .deleteAccountWithPostCode(POST_CODE);
+                .deleteAccountWithPostCode(POST_CODE)
+                .checkAccountWasDeleted(POST_CODE);
     }
 }

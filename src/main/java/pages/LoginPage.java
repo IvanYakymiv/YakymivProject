@@ -14,6 +14,11 @@ public class LoginPage extends ParentPage{
     @FindBy(xpath = ".//button[text()='Customer Login']")
     private WebElement customerLoginButton;
 
+    @Override
+    String getRelativeURL() {
+        return "/login";
+    }
+
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -25,6 +30,7 @@ public class LoginPage extends ParentPage{
         } catch (Exception e){
             printErrorAndStop(e);
         }
+        checkIsRedirectLoginPage();
         return new LoginPage(webDriver);
     }
 
@@ -36,6 +42,13 @@ public class LoginPage extends ParentPage{
     public CustomerPage clickOnCustomerLoginButton(){
         clickOnElement(customerLoginButton);
         return new CustomerPage(webDriver);
+    }
+
+    public LoginPage checkIsRedirectLoginPage() {
+        Assert.assertTrue("Manager Page is not loaded", customerLoginButton.isDisplayed());
+        Assert.assertTrue("Manager Page is not loaded", bankManagerLoginButton.isDisplayed());
+        checkUrl();
+        return this;
     }
 
 }

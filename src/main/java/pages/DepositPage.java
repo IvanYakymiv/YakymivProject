@@ -16,6 +16,10 @@ public class DepositPage extends ParentPage{
     public WebElement successfulMessage;
 
 
+    @Override
+    String getRelativeURL() {
+        return null;
+    }
 
     public DepositPage(WebDriver webDriver) {
         super(webDriver);

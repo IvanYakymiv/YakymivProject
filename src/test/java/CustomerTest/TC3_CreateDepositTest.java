@@ -23,7 +23,7 @@ public class TC3_CreateDepositTest extends BaseTest {
                 .enterTextToFirstNameInput(FIRST_NAME)
                 .enterTextToLastNameInput(LAST_NAME)
                 .enterTextToPostCodeInput(POST_CODE)
-                .clickOnAddCustomer()
+                .clickOnAddCustomerSubmit()
                 .clickOnCustomers()
                 .enterTextInSearch(POST_CODE)
                 .checkAccountWasCreated(POST_CODE);

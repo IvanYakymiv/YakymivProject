@@ -18,6 +18,11 @@ public class AccountPage extends ParentPage{
     public WebElement withdrawButton;
 
 
+    @Override
+    String getRelativeURL() {
+        return null;
+    }
+
     public AccountPage(WebDriver webDriver) {
         super(webDriver);
     }

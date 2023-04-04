@@ -19,6 +19,11 @@ public class WithdrawlPage extends ParentPage{
     public WebElement errorMessage;
 
 
+    @Override
+    String getRelativeURL() {
+        return null;
+    }
+
     public WithdrawlPage(WebDriver webDriver) {
         super(webDriver);
     }

@@ -32,9 +32,9 @@ public class ActionsWithElement {
 
     protected void clickOnElement(WebElement webElement) {
         try {
-            webDriverWait10.until(ExpectedConditions.visibilityOf(webElement));
+            webDriverWait15.until(ExpectedConditions.visibilityOf(webElement));
             webElement.click();
-            logger.info(getElementName(webElement) + " was clicked");
+            logger.info(getElementName(webElement) + " Button was clicked");
 
         } catch (Exception e) {
             printErrorAndStop(e);
@@ -46,7 +46,7 @@ public class ActionsWithElement {
             webDriverWait15.until(ExpectedConditions.visibilityOf(webElement));
             webElement.clear();
             webElement.sendKeys(data);
-            logger.info(data + " was inputted to " + getElementName(webElement));
+            logger.info(data + " was inputted");
         } catch (Exception e) {
             printErrorAndStop(e);
         }

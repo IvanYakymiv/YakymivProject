@@ -20,7 +20,7 @@ public class Util {
      * Method returned SystemDateAndTime In Format yyyy-MM-dd_HH-mm-ss
      */
     public static String getDateAndTimeFormatted(){
-        return getDateAndTime("yyyy-MM-dd_HH-mm-ss");
+        return getDateAndTime("mm-ss");
     }
 
     /**

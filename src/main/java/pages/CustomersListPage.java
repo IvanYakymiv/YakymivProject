@@ -17,6 +17,11 @@ public class CustomersListPage extends ParentPage {
 
     public String customerPostCodeInList = ".//td[text()='%s']";
 
+    @Override
+    String getRelativeURL() {
+        return "/manager/list";
+    }
+
     public CustomersListPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -31,7 +36,7 @@ public class CustomersListPage extends ParentPage {
     }
 
     public CustomersListPage checkAccountWasCreated(String accountPostCode) {
-        Assert.assertEquals("Number of posts with Post Code ",1 , getPostListWithTitle(accountPostCode).size());
+        Assert.assertEquals("Number of customers with Post Code ", 1 , getPostListWithTitle(accountPostCode).size());
         logger.info("Account is present");
         return this;
     }
@@ -39,6 +44,18 @@ public class CustomersListPage extends ParentPage {
     public CustomersListPage deleteAccountWithPostCode(String postCode){
         clickOnElement(deleteButton);
         logger.info("Customer was deleted with Post Code: " + postCode);
+        return this;
+    }
+
+    public CustomersListPage checkIsRedirectCustomersPage() {
+        Assert.assertTrue("Customers List is not loaded", searchCustomerInput.isDisplayed());
+        checkUrl();
+        return this;
+    }
+
+    public CustomersListPage checkAccountWasDeleted(String accountPostCode) {
+        Assert.assertEquals("Number of customers with Post Code ", 0 , getPostListWithTitle(accountPostCode).size());
+        logger.info("No customers with Post Code " + accountPostCode);
         return this;
     }
 }

@@ -15,6 +15,11 @@ public class OpenAccountPage extends ParentPage{
     @FindBy(xpath = ".//button[@type='submit']")
     private WebElement processButton;
 
+    @Override
+    String getRelativeURL() {
+        return null;
+    }
+
     public OpenAccountPage(WebDriver webDriver) {
         super(webDriver);
     }

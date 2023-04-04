@@ -11,6 +11,11 @@ public class CustomerPage extends ParentPage{
     @FindBy(xpath = ".//button[@type='submit']")
     public WebElement loginButton;
 
+    @Override
+    String getRelativeURL() {
+        return null;
+    }
+
     public CustomerPage(WebDriver webDriver) {
         super(webDriver);
     }

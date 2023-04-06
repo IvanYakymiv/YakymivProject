@@ -76,10 +76,7 @@ public class BaseTest {
                 .checkIsRedirectOpenAccountPage()
                 .selectNameOfCustomerInDD(firstName)
                 .selectCurrencyInDD(currency)
-                .clickOnProcessButton()
-                .clickOnCustomers()
-                .enterTextInSearch(postCode)
-                .checkAccountWasCreated(firstName);
+                .clickOnProcessButton();
     }
 
     public void createDeposit(String firstName, String lastName, String deposit) {

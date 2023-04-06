@@ -69,6 +69,14 @@ public class CustomersListPage extends ParentPage {
         return this;
     }
 
+    public CustomersListPage checkThreeAccountWasCreated(String name) {
+        String[] arr = getAccountNumber(name).split(" ");
+        Assert.assertEquals("Number accounts of customer " + name, 3, arr.length);
+        return this;
+    }
+
+
+
     public String[] getDataOfCustomerFromTable(String name) {
         enterTextInSearch(name);
         List<WebElement> rows = CustomersTable.findElements(By.tagName("tr"));

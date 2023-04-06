@@ -1,5 +1,6 @@
 package pages;
 
+import com.beust.ah.A;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -8,9 +9,12 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class TransactionListPage extends ParentPage{
+public class TransactionListPage extends ParentPage {
     @FindBy(xpath = ".//button[@ng-click = 'reset()']")
     public WebElement resetButton;
+
+    @FindBy(xpath = ".//button[@ng-click = 'back()']")
+    public WebElement backButton;
 
     @FindBy(xpath = "//*[@class='table table-bordered table-striped']/tbody")
     public WebElement CustomersTable;
@@ -44,12 +48,17 @@ public class TransactionListPage extends ParentPage{
         //ToDO
     }
 
-    public void checkTransactionData(String deposit, String type) {
+    public TransactionListPage checkTransactionData(String deposit, String type) {
         String[] arrayDataOfCustomer = getDataOfTransactionsFromTable();
         Assert.assertEquals("Transaction Type is", type, arrayDataOfCustomer[2]);
         Assert.assertEquals("Amount is", deposit, arrayDataOfCustomer[1]);
         //ToDO
+        return this;
     }
 
 
+    public AccountPage clickOnBack() {
+        clickOnElement(backButton);
+        return new AccountPage(webDriver);
+    }
 }

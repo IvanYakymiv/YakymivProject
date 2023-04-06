@@ -7,8 +7,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class AccountPage extends ParentPage {
-    @FindBy(xpath = ".//*[@id = 'accountSelect']")
-    public WebElement accountsDropDown;
 
     @FindBy(xpath = ".//button[@ng-click='transactions()']")
     public WebElement transactionButton;

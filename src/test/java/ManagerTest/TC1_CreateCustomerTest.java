@@ -7,7 +7,6 @@ import org.junit.Test;
 
 public class TC1_CreateCustomerTest extends BaseTest {
     final String FIRST_NAME = "Ivan" + Util.getDateAndTimeFormatted();
-    ;
     final String LAST_NAME = "Ivan";
     final String POST_CODE = Util.getDateAndTimeFormatted();
 

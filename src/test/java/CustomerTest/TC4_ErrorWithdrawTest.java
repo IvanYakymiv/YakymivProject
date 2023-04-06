@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class TC4_ErrorWithdrawTest extends BaseTest {
 
-    final String FIRST_NAME = "Ivan";
+    final String FIRST_NAME = "Ivan" + Util.getDateAndTimeFormatted();
     final String LAST_NAME = "Ivan";
     final String POST_CODE = Util.getDateAndTimeFormatted();
     final String CURRENCY = "Dollar";
@@ -16,57 +16,53 @@ public class TC4_ErrorWithdrawTest extends BaseTest {
 
 
     @Before
-    public void Before(){
-        loginPage.openLoginPage()
-                .clickOnBankManagerLogin()
-                .clickOnAddCustomer()
-                .enterTextToFirstNameInput(FIRST_NAME)
-                .enterTextToLastNameInput(LAST_NAME)
-                .enterTextToPostCodeInput(POST_CODE)
-                .clickOnAddCustomerSubmit()
-                .clickOnCustomers()
-                .enterTextInSearch(POST_CODE)
-                .checkCustomerWasCreated(POST_CODE);
-        loginPage.openLoginPage()
-                .clickOnBankManagerLogin()
-                .clickOnOpenAccount()
-                .selectNameOfCustomerInDD(FIRST_NAME)
-                .selectCurrencyInDD(CURRENCY)
-                .clickOnProcessButton();
+    public void Before() throws InterruptedException {
+        createCustomer(FIRST_NAME, LAST_NAME, POST_CODE);
+        createAccount(FIRST_NAME, CURRENCY, POST_CODE);
         loginPage.openLoginPage()
                 .clickOnCustomerLoginButton()
+                .checkIsRedirectCustomerPage()
                 .selectCustomerNameFromDD(FIRST_NAME)
                 .clickOnLogin()
+                .checkIsCustomerLogIn(FIRST_NAME, LAST_NAME)
                 .clickOnDepositButton()
                 .inputAmountOfDeposit(DEPOSIT)
                 .clickOnDepositButton()
-                .checkSuccessfulMessage();
+                .checkSuccessfulMessage()
+                .checkAccountBalance(DEPOSIT)
+                .clickOnTransactionButton()
+                .checkIsRedirectTransactionPage()
+                .checkTransactionData(DEPOSIT, "Credit")
+                ;
     }
 
 
     @Test
-    public void createDeposit(){
+    public void errorWithdrawTest() throws InterruptedException {
         loginPage.openLoginPage()
                 .clickOnCustomerLoginButton()
+                .checkIsRedirectCustomerPage()
                 .selectCustomerNameFromDD(FIRST_NAME)
                 .clickOnLogin()
+                .checkIsCustomerLogIn(FIRST_NAME, LAST_NAME)
                 .clickOnWithdrawButton()
+                .checkIsRedirectWithdrawlPage()
+                .inputErrorAmountOfWithdraw(DEPOSIT)
+                .clickOnWithdrawButton()
+                .checkErrorMessage()
                 .inputAmountOfWithdraw(DEPOSIT)
                 .clickOnWithdrawButton()
                 .checkSuccessfulMessage()
-
+                .clickOnTransactionButton()
+                .checkIsRedirectTransactionPage()
+                .checkTransactionData(DEPOSIT, "Debit")
         ;
     }
 
 
     @After
     public void After() {
-        loginPage.openLoginPage()
-                .clickOnBankManagerLogin()
-                .clickOnAddCustomer()
-                .clickOnCustomers()
-                .enterTextInSearch(POST_CODE)
-                .deleteAccountWithPostCode(POST_CODE);
+        deleteCustomer(POST_CODE);
     }
 
 }

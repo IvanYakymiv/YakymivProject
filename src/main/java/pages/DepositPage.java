@@ -18,14 +18,14 @@ public class DepositPage extends ParentPage {
     @FindBy(xpath = ".//span[text()='Deposit Successful']")
     public WebElement successfulMessage;
 
-    @FindBy(xpath = "//strong[contains(text(), 'Balance')]/following-sibling::strong[contains(@class, 'ng-binding')]")
-    public WebElement depositBalance;
+    @FindBy(xpath = ".//button[@ng-click='transactions()']")
+    public WebElement transactionButton;
 
     public String depositData = ".//strong[@class='ng-binding']";
 
     @Override
     String getRelativeURL() {
-        return null;
+        return "/account";
     }
 
     public DepositPage(WebDriver webDriver) {
@@ -47,18 +47,34 @@ public class DepositPage extends ParentPage {
         return this;
     }
 
-    public void checkAccountBalance() {
-        getDataFromDepositHeader();
-
+    public DepositPage checkAccountBalance(String deposit) throws InterruptedException {
+        Assert.assertEquals("Balance of customer account ", deposit, getAccountBalance());
+        logger.info("Account Balance Equals Deposit");
+        Thread.sleep(1000);
+        //ToDo
+        return this;
     }
 
-    public void getDataFromDepositHeader() {
+    public String[] getDataFromDepositHeader() {
         List<WebElement> values = webDriver.findElements(By.xpath(depositData));
         String[] arrayDataOfDeposit = new String[values.size()];
         for (int i = 0; i < values.size(); i++) {
             arrayDataOfDeposit[i] = values.get(i).getText();
-            logger.info(values.get(i).getText());
         }
+        return arrayDataOfDeposit;
     }
+
+    public String getAccountBalance() {
+        String[] arrayDataOfDeposit = getDataFromDepositHeader();
+        return arrayDataOfDeposit[1];
+
+    }
+
+    public TransactionListPage clickOnTransactionButton() {
+        clickOnElement(transactionButton);
+        return new TransactionListPage(webDriver);
+    }
+
+
 }
 

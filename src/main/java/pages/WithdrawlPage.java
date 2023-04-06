@@ -18,18 +18,26 @@ public class WithdrawlPage extends ParentPage{
     @FindBy(xpath = ".//span[text()='Transaction Failed. You can not withdraw amount more than the balance.']")
     public WebElement errorMessage;
 
+    @FindBy(xpath = ".//button[@ng-click='transactions()']")
+    public WebElement transactionButton;
+
 
     @Override
     String getRelativeURL() {
-        return null;
+        return "/account";
     }
 
     public WithdrawlPage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public WithdrawlPage inputAmountOfWithdraw(String deposit) {
-        enterTextToInput(amountInput, deposit);
+    public WithdrawlPage inputAmountOfWithdraw(String amount) {
+        enterTextToInput(amountInput, amount);
+        return this;
+    }
+
+    public WithdrawlPage inputErrorAmountOfWithdraw(String amount) {
+        enterTextToInput(amountInput, amount + 1);
         return this;
     }
 
@@ -38,8 +46,9 @@ public class WithdrawlPage extends ParentPage{
         return this;
     }
 
-    public WithdrawlPage checkSuccessfulMessage() {
+    public WithdrawlPage checkSuccessfulMessage() throws InterruptedException {
         Assert.assertTrue("Successful Message is shown", successfulMessage.isDisplayed());
+        Thread.sleep(1000);
         return this;
     }
 
@@ -47,6 +56,19 @@ public class WithdrawlPage extends ParentPage{
         Assert.assertTrue("Error Message is shown", errorMessage.isDisplayed());
         return this;
     }
+
+    public WithdrawlPage checkIsRedirectWithdrawlPage() {
+        Assert.assertTrue("Customer Page is not loaded", amountInput.isDisplayed());
+        checkUrl();
+        return this;
+    }
+
+    public TransactionListPage clickOnTransactionButton() {
+        clickOnElement(transactionButton);
+        return new TransactionListPage(webDriver);
+    }
+
+
 
 
 }

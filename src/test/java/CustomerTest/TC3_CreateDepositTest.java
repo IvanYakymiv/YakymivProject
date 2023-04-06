@@ -22,7 +22,7 @@ public class TC3_CreateDepositTest extends BaseTest {
     }
 
     @Test
-    public void createDepositTest() {
+    public void createDepositTest() throws InterruptedException {
         loginPage.openLoginPage()
                 .clickOnCustomerLoginButton()
                 .checkIsRedirectCustomerPage()
@@ -33,7 +33,11 @@ public class TC3_CreateDepositTest extends BaseTest {
                 .inputAmountOfDeposit(DEPOSIT)
                 .clickOnDepositButton()
                 .checkSuccessfulMessage()
-                .checkAccountBalance();
+                .checkAccountBalance(DEPOSIT)
+                .clickOnTransactionButton()
+                .checkIsRedirectTransactionPage()
+                .checkTransactionData(DEPOSIT,"Credit")
+        ;
     }
 
 

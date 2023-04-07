@@ -40,16 +40,19 @@ public class DepositPage extends ParentPage {
         return this;
     }
 
-    public DepositPage checkSuccessfulMessage() {
-        Assert.assertTrue("Text in success message element", successfulMessage.isDisplayed());
+    public DepositPage checkSuccessfulMessage() throws InterruptedException {
+        Assert.assertTrue("Text in success message element: ", successfulMessage.isDisplayed());
+        Thread.sleep(1000);
+        //так як на цьому сайті немає ніякого лоадера, то прийшлось використати такий костиль у вигляді Thread.sleep
+        // щоб дані на сторінці Transactions встигли з'явитись
         return this;
     }
 
-    public DepositPage checkAccountBalance(String deposit) throws InterruptedException {
+    public DepositPage checkAccountBalance(String deposit) {
         Assert.assertEquals("Balance of customer account ", deposit, getAccountBalance());
         logger.info("Account Balance Equals Deposit");
-        Thread.sleep(1000);
-        //ToDo
+
+
         return this;
     }
 

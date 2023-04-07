@@ -48,7 +48,9 @@ public class WithdrawPage extends ParentPage {
 
     public WithdrawPage checkSuccessfulMessage() throws InterruptedException {
         Assert.assertTrue("Successful Message is shown", successfulMessage.isDisplayed());
-        Thread.sleep(1000);//todo
+        Thread.sleep(1000);
+        //так як на цьому сайті немає ніякого лоадера, то прийшлось використати такий костиль у вигляді Thread.sleep
+        // щоб дані на сторінці Transactions встигли з'явитись
         return this;
     }
 

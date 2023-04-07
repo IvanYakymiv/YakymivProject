@@ -7,12 +7,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 
-public class TC5_WithdrawFormAllAccountsTest extends BaseTest {
+public class TC5_WithdrawFromAllAccountsTest extends BaseTest {
 
     final String FIRST_NAME = "Ivan" + Util.getDateAndTimeFormatted();
     final String LAST_NAME = "Ivan";
     final String POST_CODE = Util.getDateAndTimeFormatted();
-    final String CURRENCY = "Dollar";
     final String DEPOSIT = "1901"; //todo
 
 
@@ -38,7 +37,7 @@ public class TC5_WithdrawFormAllAccountsTest extends BaseTest {
                 // create third account
                 .getManagerHeaderElements().clickOnCustomers()
                 .enterTextInSearch(POST_CODE)
-                .checkNumberOfAccountWasCreated(FIRST_NAME,3);
+                .checkNumberOfAccountWasCreated(FIRST_NAME, 3);
 
         loginPage.openLoginPage()
                 .clickOnCustomerLoginButton()
@@ -50,7 +49,10 @@ public class TC5_WithdrawFormAllAccountsTest extends BaseTest {
                 .inputAmountOfDeposit(DEPOSIT)
                 .clickOnDepositSubmitButton()
                 .checkSuccessfulMessage()
-                .checkAccountBalance(DEPOSIT)
+                .getAccountHeaderElements().clickOnTransactionButton()
+                .checkIsRedirectTransactionPage()
+                .checkTransactionData(DEPOSIT, "Credit")
+                .clickOnBack()
                 // first deposit to account
                 .getAccountHeaderElements().selectNextAccountInDD()
                 .checkAccountCurrency("Pound")
@@ -58,6 +60,10 @@ public class TC5_WithdrawFormAllAccountsTest extends BaseTest {
                 .inputAmountOfDeposit(DEPOSIT)
                 .clickOnDepositSubmitButton()
                 .checkSuccessfulMessage()
+                .getAccountHeaderElements().clickOnTransactionButton()
+                .checkIsRedirectTransactionPage()
+                .checkTransactionData(DEPOSIT, "Credit")
+                .clickOnBack()
                 // second deposit to account
                 .getAccountHeaderElements().selectNextAccountInDD()
                 .checkAccountCurrency("Rupee")
@@ -65,12 +71,15 @@ public class TC5_WithdrawFormAllAccountsTest extends BaseTest {
                 .inputAmountOfDeposit(DEPOSIT)
                 .clickOnDepositSubmitButton()
                 .checkSuccessfulMessage()
-                // third deposit to account
+                .getAccountHeaderElements().clickOnTransactionButton()
+                .checkIsRedirectTransactionPage()
+                .checkTransactionData(DEPOSIT, "Credit")
+        // third deposit to account
         ;
     }
 
     @Test
-    public void withdrawFormAllAccountsTest() throws InterruptedException {
+    public void withdrawFromAllAccountsTest() throws InterruptedException {
         loginPage.openLoginPage()
                 .clickOnCustomerLoginButton()
                 .checkIsRedirectCustomerPage()
@@ -84,6 +93,11 @@ public class TC5_WithdrawFormAllAccountsTest extends BaseTest {
                 .inputAmountOfWithdraw(DEPOSIT)
                 .clickOnWithdrawSubmitButton()
                 .checkSuccessfulMessage()
+                .getAccountHeaderElements().clickOnTransactionButton()
+                .checkIsRedirectTransactionPage()
+                .checkTransactionData(DEPOSIT, "Debit")
+                .clickOnBack()
+
                 .getAccountHeaderElements().selectNextAccountInDD()
 
                 .checkAccountCurrency("Pound")
@@ -92,6 +106,11 @@ public class TC5_WithdrawFormAllAccountsTest extends BaseTest {
                 .inputAmountOfWithdraw(DEPOSIT)
                 .clickOnWithdrawSubmitButton()
                 .checkSuccessfulMessage()
+                .getAccountHeaderElements().clickOnTransactionButton()
+                .checkIsRedirectTransactionPage()
+                .checkTransactionData(DEPOSIT, "Debit")
+                .clickOnBack()
+
                 .getAccountHeaderElements().selectNextAccountInDD()
 
                 .checkAccountCurrency("Rupee")
@@ -100,6 +119,9 @@ public class TC5_WithdrawFormAllAccountsTest extends BaseTest {
                 .inputAmountOfWithdraw(DEPOSIT)
                 .clickOnWithdrawSubmitButton()
                 .checkSuccessfulMessage()
+                .getAccountHeaderElements().clickOnTransactionButton()
+                .checkIsRedirectTransactionPage()
+                .checkTransactionData(DEPOSIT, "Debit")
         ;
     }
 

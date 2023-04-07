@@ -34,8 +34,6 @@ public class BaseTest {
     public void after() {
         webDriver.quit();
         logger.info("Browser is closed");
-
-
     }
 
     @Rule
@@ -66,17 +64,6 @@ public class BaseTest {
                 .enterTextInSearch(postCode)
                 .deleteAccountWithPostCode(postCode)
                 .checkCustomerWasDeleted(postCode);
-    }
-
-    public void createAccount(String firstName, String currency, String postCode) {
-        loginPage.openLoginPage()
-                .clickOnBankManagerLogin()
-                .checkIsRedirectManagerPage()
-                .getManagerHeaderElements().clickOnOpenAccount()
-                .checkIsRedirectOpenAccountPage()
-                .selectNameOfCustomerInDD(firstName)
-                .selectCurrencyInDD(currency)
-                .clickOnProcessButton();
     }
 }
 

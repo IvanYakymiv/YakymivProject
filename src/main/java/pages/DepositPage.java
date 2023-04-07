@@ -1,5 +1,7 @@
 package pages;
 
+import libs.TestData;
+import libs.Util;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,6 +19,7 @@ public class DepositPage extends ParentPage {
 
     public String accountData = ".//strong[@class='ng-binding']";
 
+
     @Override
     String getRelativeURL() {
         return "/account";
@@ -33,6 +36,7 @@ public class DepositPage extends ParentPage {
 
     public DepositPage clickOnDepositSubmitButton() {
         clickOnElement(depositButton);
+        TestData.date = Util.getFormattedDate();
         return this;
     }
 

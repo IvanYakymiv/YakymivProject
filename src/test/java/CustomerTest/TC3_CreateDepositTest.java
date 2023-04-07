@@ -18,7 +18,17 @@ public class TC3_CreateDepositTest extends BaseTest {
     @Before
     public void Before() {
         createCustomer(FIRST_NAME, LAST_NAME, POST_CODE);
-        createAccount(FIRST_NAME, CURRENCY, POST_CODE);
+        loginPage.openLoginPage()
+                .clickOnBankManagerLogin()
+                .checkIsRedirectManagerPage()
+                .getManagerHeaderElements().clickOnOpenAccount()
+                .checkIsRedirectOpenAccountPage()
+                .selectNameOfCustomerInDD(FIRST_NAME)
+                .selectCurrencyInDD(CURRENCY)
+                .clickOnProcessButton()
+                .getManagerHeaderElements().clickOnCustomers()
+                .enterTextInSearch(POST_CODE)
+                .checkNumberOfAccountWasCreated(FIRST_NAME,1);
     }
 
     @Test

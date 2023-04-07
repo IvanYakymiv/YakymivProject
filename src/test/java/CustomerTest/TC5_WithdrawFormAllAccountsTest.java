@@ -45,7 +45,6 @@ public class TC5_WithdrawFormAllAccountsTest extends BaseTest {
                 .checkIsRedirectCustomerPage()
                 .selectCustomerNameFromDD(FIRST_NAME)
                 .clickOnLogin()
-
                 .checkAccountCurrency("Dollar")
                 .getAccountHeaderElements().clickOnDepositButton()
                 .inputAmountOfDeposit(DEPOSIT)

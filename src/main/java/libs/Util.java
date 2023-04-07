@@ -8,7 +8,7 @@ public class Util {
     private Util() {
     }
 
-    public static void waitABit(Integer second){
+    public static void waitABit(Integer second) {
         try {
             Thread.sleep(second * 1000L);
         } catch (InterruptedException e) {
@@ -19,24 +19,27 @@ public class Util {
     /**
      * Method returned SystemDateAndTime In Format yyyy-MM-dd_HH-mm-ss
      */
-    public static String getDateAndTimeFormatted(){
+    public static String getDateAndTimeFormatted() {
         return getDateAndTime("mm-ss");
     }
 
     /**
      * Method returned SystemDateAndTime In Format yyyy-MM-dd_HH-mm-ss
      */
-    public static String getDateAndTimeFormattedOnlyNumbers(){
+    public static String getDateAndTimeFormattedOnlyNumbers() {
         return getDateAndTime("yyyyMMddHHmmss");
     }
 
     /**
      * Method returned SystemDateAndTime
      */
-    public static String getDateAndTime(String format){
+    public static String getDateAndTime(String format) {
         DateFormat dateFormat = new SimpleDateFormat(format);
         Date date = new Date();
         return dateFormat.format(date);
     }
 
+    public static String getFormattedDate() {
+        return getDateAndTime("MMM d, yyyy h:mm:ss a");
+    }
 }

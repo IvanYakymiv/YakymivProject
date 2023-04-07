@@ -1,5 +1,7 @@
 package pages;
 
+import libs.TestData;
+import libs.Util;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -40,6 +42,7 @@ public class WithdrawPage extends ParentPage {
 
     public WithdrawPage clickOnWithdrawSubmitButton() {
         clickOnElement(withdrawButton);
+        TestData.date = Util.getFormattedDate();
         return this;
     }
 

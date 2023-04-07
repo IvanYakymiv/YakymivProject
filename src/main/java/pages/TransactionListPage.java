@@ -1,5 +1,6 @@
 package pages;
 
+import libs.TestData;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -33,6 +34,7 @@ public class TransactionListPage extends ParentPage {
 
     public TransactionListPage checkTransactionData(String deposit, String type) {
         String[] arrayDataOfCustomer = getDataFromTable(customersTable);
+        Assert.assertEquals("Date  is", TestData.date, arrayDataOfCustomer[0]);
         Assert.assertEquals("Transaction Type is", type, arrayDataOfCustomer[2]);
         Assert.assertEquals("Amount is", deposit, arrayDataOfCustomer[1]);
         return this;

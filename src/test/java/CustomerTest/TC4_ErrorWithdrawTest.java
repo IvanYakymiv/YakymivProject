@@ -18,7 +18,17 @@ public class TC4_ErrorWithdrawTest extends BaseTest {
     @Before
     public void Before() throws InterruptedException {
         createCustomer(FIRST_NAME, LAST_NAME, POST_CODE);
-        createAccount(FIRST_NAME, CURRENCY, POST_CODE);
+        loginPage.openLoginPage()
+                .clickOnBankManagerLogin()
+                .checkIsRedirectManagerPage()
+                .getManagerHeaderElements().clickOnOpenAccount()
+                .checkIsRedirectOpenAccountPage()
+                .selectNameOfCustomerInDD(FIRST_NAME)
+                .selectCurrencyInDD(CURRENCY)
+                .clickOnProcessButton()
+                .getManagerHeaderElements().clickOnCustomers()
+                .enterTextInSearch(POST_CODE)
+                .checkNumberOfAccountWasCreated(FIRST_NAME,1);
         loginPage.openLoginPage()
                 .clickOnCustomerLoginButton()
                 .checkIsRedirectCustomerPage()

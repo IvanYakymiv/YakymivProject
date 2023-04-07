@@ -45,13 +45,13 @@ public class BaseTest {
         loginPage.openLoginPage()
                 .clickOnBankManagerLogin()
                 .checkIsRedirectManagerPage()
-                .clickOnAddCustomer()
+                .getManagerHeaderElements().clickOnAddCustomer()
                 .checkIsRedirectAddCustomerPage()
                 .enterTextToFirstNameInput(firstName)
                 .enterTextToLastNameInput(lastName)
                 .enterTextToPostCodeInput(postCode)
                 .clickOnAddCustomerSubmit()
-                .clickOnCustomers()
+                .getManagerHeaderElements().clickOnCustomers()
                 .checkIsRedirectCustomersPage()
                 .enterTextInSearch(postCode)
                 .checkCustomerWasCreated(postCode);
@@ -61,7 +61,7 @@ public class BaseTest {
         loginPage.openLoginPage()
                 .clickOnBankManagerLogin()
                 .checkIsRedirectManagerPage()
-                .clickOnCustomers()
+                .getManagerHeaderElements().clickOnCustomers()
                 .checkIsRedirectCustomersPage()
                 .enterTextInSearch(postCode)
                 .deleteAccountWithPostCode(postCode)
@@ -72,24 +72,11 @@ public class BaseTest {
         loginPage.openLoginPage()
                 .clickOnBankManagerLogin()
                 .checkIsRedirectManagerPage()
-                .clickOnOpenAccount()
+                .getManagerHeaderElements().clickOnOpenAccount()
                 .checkIsRedirectOpenAccountPage()
                 .selectNameOfCustomerInDD(firstName)
                 .selectCurrencyInDD(currency)
                 .clickOnProcessButton();
-    }
-
-    public void createDeposit(String firstName, String lastName, String deposit) {
-        loginPage.openLoginPage()
-                .clickOnCustomerLoginButton()
-                .checkIsRedirectCustomerPage()
-                .selectCustomerNameFromDD(firstName)
-                .clickOnLogin()
-                .checkIsCustomerLogIn(firstName, lastName)
-                .clickOnDepositButton()
-                .inputAmountOfDeposit(deposit)
-                .clickOnDepositButton()
-                .checkSuccessfulMessage();
     }
 }
 

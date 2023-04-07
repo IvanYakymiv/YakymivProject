@@ -1,6 +1,5 @@
 package pages;
 
-import libs.Util;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,10 +17,6 @@ public class AddCustomer extends ParentPage {
 
     @FindBy(xpath = ".//button[@type='submit']")
     public WebElement addCustomerSubmitButton;
-
-    @FindBy(xpath = ".//button[@ng-class='btnClass3']")
-    public WebElement customersButton;
-
 
     @Override
     String getRelativeURL() {
@@ -48,19 +43,8 @@ public class AddCustomer extends ParentPage {
     }
 
     public AddCustomer clickOnAddCustomerSubmit() {
-        Util.waitABit(1);
         clickOnElement(addCustomerSubmitButton);
         return this;
-    }
-
-    public AddCustomer getTextFromAlert() {
-        getTextFromAlertAndClickOK(webDriver);
-        return this;
-    }
-
-    public CustomersListPage clickOnCustomers() {
-        clickOnElement(customersButton);
-        return new CustomersListPage(webDriver);
     }
 
     public AddCustomer checkIsRedirectAddCustomerPage() {

@@ -24,14 +24,14 @@ public class TC2_CreateAccountTest extends BaseTest {
         loginPage.openLoginPage()
                 .clickOnBankManagerLogin()
                 .checkIsRedirectManagerPage()
-                .clickOnOpenAccount()
+                .getManagerHeaderElements().clickOnOpenAccount()
                 .checkIsRedirectOpenAccountPage()
                 .selectNameOfCustomerInDD(FIRST_NAME)
                 .selectCurrencyInDD(CURRENCY)
                 .clickOnProcessButton()
-                .clickOnCustomers()
+                .getManagerHeaderElements().clickOnCustomers()
                 .enterTextInSearch(POST_CODE)
-                .checkAccountWasCreated(FIRST_NAME);
+                .checkNumberOfAccountWasCreated(FIRST_NAME,1);
     }
 
     @After

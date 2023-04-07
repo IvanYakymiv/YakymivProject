@@ -62,37 +62,13 @@ public class CustomersListPage extends ParentPage {
         return this;
     }
 
-
-    public CustomersListPage checkAccountWasCreated(String name) {
-        String[] arr = getAccountNumber(name).split(" ");
-        Assert.assertEquals("Number accounts of customer " + name, 1, arr.length);
+    public CustomersListPage checkNumberOfAccountWasCreated(String name, Integer count) {
+        String[] arr = getAccountNumber().split(" ");
+        Assert.assertEquals("Number accounts of customer " + name, count.intValue(), arr.length);
         return this;
     }
 
-    public CustomersListPage checkThreeAccountWasCreated(String name) {
-        String[] arr = getAccountNumber(name).split(" ");
-        Assert.assertEquals("Number accounts of customer " + name, 3, arr.length);
-        return this;
-    }
-
-
-
-    public String[] getDataOfCustomerFromTable(String name) {
-        enterTextInSearch(name);
-        List<WebElement> rows = CustomersTable.findElements(By.tagName("tr"));
-        String[] arrayDataOfCustomer = new String[0];
-        for (int i = 0; i < rows.size(); i++) {
-            List<WebElement> columns = rows.get(i).findElements(By.tagName("td"));
-            arrayDataOfCustomer = new String[columns.size()];
-            for (int j = 0; j < columns.size(); j++) {
-                arrayDataOfCustomer[j] = columns.get(j).getText();
-            }
-        }
-        return arrayDataOfCustomer;
-    }
-
-    public String getAccountNumber(String name) {
-        String[] arrayDataOfCustomer = getDataOfCustomerFromTable(name);
-        return arrayDataOfCustomer[3];
+    public String getAccountNumber() {
+        return getDataFromTable(CustomersTable)[3];
     }
 }

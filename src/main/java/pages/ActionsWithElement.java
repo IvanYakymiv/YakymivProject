@@ -7,11 +7,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.Alert;
 
 
 import java.time.Duration;
+import java.util.List;
 
 public class ActionsWithElement {
     protected WebDriver webDriver;
@@ -82,15 +84,51 @@ public class ActionsWithElement {
         }
     }
 
+    protected void selectNextValueInDD(WebElement dropDown) {
+        try {
+            Select select = new Select(dropDown);
+            List<WebElement> listOfOptions = select.getOptions();
+            Integer count = listOfOptions.indexOf(select.getFirstSelectedOption());
+            selectTextInDropDownByUI(dropDown, listOfOptions.get(count + 1).getText());
+            logger.info("Account changed");
+        } catch (Exception e) {
+            printErrorAndStop(e);
+        }
+    }
 
 
+    protected String[] getDataFromTable(WebElement table) {
+        String[] arrayDataOfCustomer = new String[0];
+        try {
+            List<WebElement> rows = table.findElements(By.tagName("tr"));
+            for (int i = 0; i < rows.size(); i++) {
+                List<WebElement> columns = rows.get(i).findElements(By.tagName("td"));
+                arrayDataOfCustomer = new String[columns.size()];
+                for (int j = 0; j < columns.size(); j++) {
+                    arrayDataOfCustomer[j] = columns.get(j).getText();
+                }
+            }
+        } catch (Exception e) {
+            printErrorAndStop(e);
+        }
+        return arrayDataOfCustomer;
+    }
 
 
-//    protected void clickOnElement(String xpath) {
-//        try {
-//            clickOnElement(webDriver.findElement(By.xpath(xpath)));
-//        } catch (Exception e) {
-//            printErrorAndStop(e);
-//        }
-//    }
+    protected String[] getDataFromSameXpathToStringArray(String xpath) {
+        String[] arrayDataOfDeposit = new String[0];
+        try {
+            List<WebElement> values = webDriver.findElements(By.xpath(xpath));
+            arrayDataOfDeposit = new String[values.size()];
+            for (int i = 0; i < values.size(); i++) {
+                arrayDataOfDeposit[i] = values.get(i).getText();
+            }
+            return arrayDataOfDeposit;
+        } catch (Exception e) {
+            printErrorAndStop(e);
+        }
+        return arrayDataOfDeposit;
+    }
+
+
 }

@@ -13,9 +13,7 @@ public class TC5_WithdrawFormAllAccountsTest extends BaseTest {
     final String LAST_NAME = "Ivan";
     final String POST_CODE = Util.getDateAndTimeFormatted();
     final String CURRENCY = "Dollar";
-    final String DEPOSIT = "1901";
-
-
+    final String DEPOSIT = "1901"; //todo
 
 
     @Before
@@ -24,52 +22,52 @@ public class TC5_WithdrawFormAllAccountsTest extends BaseTest {
         loginPage.openLoginPage()
                 .clickOnBankManagerLogin()
                 .checkIsRedirectManagerPage()
-                .clickOnOpenAccount()
+                .getManagerHeaderElements().clickOnOpenAccount()
                 .checkIsRedirectOpenAccountPage()
                 .selectNameOfCustomerInDD(FIRST_NAME)
                 .selectCurrencyInDD("Dollar")
                 .clickOnProcessButton()
+                // create first account
                 .selectNameOfCustomerInDD(FIRST_NAME)
                 .selectCurrencyInDD("Pound")
                 .clickOnProcessButton()
+                // create second account
                 .selectNameOfCustomerInDD(FIRST_NAME)
                 .selectCurrencyInDD("Rupee")
                 .clickOnProcessButton()
-                .clickOnCustomers()
+                // create third account
+                .getManagerHeaderElements().clickOnCustomers()
                 .enterTextInSearch(POST_CODE)
-                .checkThreeAccountWasCreated(FIRST_NAME);
+                .checkNumberOfAccountWasCreated(FIRST_NAME,3);
+
         loginPage.openLoginPage()
                 .clickOnCustomerLoginButton()
                 .checkIsRedirectCustomerPage()
                 .selectCustomerNameFromDD(FIRST_NAME)
                 .clickOnLogin()
-                .checkIsCustomerLogIn(FIRST_NAME, LAST_NAME)
-                .clickOnDepositButton()
+
+                .checkAccountCurrency("Dollar")
+                .getAccountHeaderElements().clickOnDepositButton()
                 .inputAmountOfDeposit(DEPOSIT)
-                .clickOnDepositButton()
+                .clickOnDepositSubmitButton()
                 .checkSuccessfulMessage()
                 .checkAccountBalance(DEPOSIT)
-                .clickOnTransactionButton()
-                .checkIsRedirectTransactionPage()
-                .checkTransactionData(DEPOSIT,"Credit")
-                .clickOnBack()
-                .selectNextAccountInDD()
-                .checkChangingAccount("Pound")
-                .clickOnDepositButton()
+                // first deposit to account
+                .getAccountHeaderElements().selectNextAccountInDD()
+                .checkAccountCurrency("Pound")
+                .getAccountHeaderElements().clickOnDepositButton()
                 .inputAmountOfDeposit(DEPOSIT)
-                .clickOnDepositButton()
+                .clickOnDepositSubmitButton()
                 .checkSuccessfulMessage()
-                .clickOnTransactionButton()
-                .clickOnBack()
-                .selectNextAccountInDD()
-                .checkChangingAccount("Rupee")
-                .clickOnDepositButton()
+                // second deposit to account
+                .getAccountHeaderElements().selectNextAccountInDD()
+                .checkAccountCurrency("Rupee")
+                .getAccountHeaderElements().clickOnDepositButton()
                 .inputAmountOfDeposit(DEPOSIT)
-                .clickOnDepositButton()
+                .clickOnDepositSubmitButton()
                 .checkSuccessfulMessage()
-                .clickOnTransactionButton()
-                .clickOnBack();
-                ;
+                // third deposit to account
+        ;
     }
 
     @Test
@@ -80,35 +78,31 @@ public class TC5_WithdrawFormAllAccountsTest extends BaseTest {
                 .selectCustomerNameFromDD(FIRST_NAME)
                 .clickOnLogin()
                 .checkIsCustomerLogIn(FIRST_NAME, LAST_NAME)
-                .clickOnWithdrawButton()
-                .checkIsRedirectWithdrawlPage()
-                .inputAmountOfWithdraw(DEPOSIT)
-                .clickOnWithdrawButton()
-                .checkSuccessfulMessage()
-                .clickOnTransactionButton()//todo
-                .clickOnBack()
-                .selectNextAccountInDD()
-                .checkChangingAccount("Pound")
-                .clickOnWithdrawButton()
-                .checkIsRedirectWithdrawlPage()
-                .inputAmountOfWithdraw(DEPOSIT)
-                .clickOnWithdrawButton()
-                .checkSuccessfulMessage()
-                .clickOnTransactionButton()//todo
-                .clickOnBack()
-                .selectNextAccountInDD()
-                .checkChangingAccount("Rupee")
-                .clickOnWithdrawButton()
-                .checkIsRedirectWithdrawlPage()
-                .inputAmountOfWithdraw(DEPOSIT)
-                .clickOnWithdrawButton()
-                .checkSuccessfulMessage()
-                .clickOnTransactionButton()//todo
-                .clickOnBack()
-                ;
 
+                .checkAccountCurrency("Dollar")
+                .getAccountHeaderElements().clickOnWithdrawButton()
+                .checkIsRedirectWithdrawPage()
+                .inputAmountOfWithdraw(DEPOSIT)
+                .clickOnWithdrawSubmitButton()
+                .checkSuccessfulMessage()
+                .getAccountHeaderElements().selectNextAccountInDD()
+
+                .checkAccountCurrency("Pound")
+                .getAccountHeaderElements().clickOnWithdrawButton()
+                .checkIsRedirectWithdrawPage()
+                .inputAmountOfWithdraw(DEPOSIT)
+                .clickOnWithdrawSubmitButton()
+                .checkSuccessfulMessage()
+                .getAccountHeaderElements().selectNextAccountInDD()
+
+                .checkAccountCurrency("Rupee")
+                .getAccountHeaderElements().clickOnWithdrawButton()
+                .checkIsRedirectWithdrawPage()
+                .inputAmountOfWithdraw(DEPOSIT)
+                .clickOnWithdrawSubmitButton()
+                .checkSuccessfulMessage()
+        ;
     }
-
 
     @After
     public void After() {

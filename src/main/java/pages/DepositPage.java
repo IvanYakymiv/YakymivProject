@@ -1,12 +1,9 @@
 package pages;
 
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import java.util.List;
 
 public class DepositPage extends ParentPage {
     @FindBy(xpath = ".//input[@placeholder='amount']")
@@ -18,10 +15,7 @@ public class DepositPage extends ParentPage {
     @FindBy(xpath = ".//span[text()='Deposit Successful']")
     public WebElement successfulMessage;
 
-    @FindBy(xpath = ".//button[@ng-click='transactions()']")
-    public WebElement transactionButton;
-
-    public String depositData = ".//strong[@class='ng-binding']";
+    public String accountData = ".//strong[@class='ng-binding']";
 
     @Override
     String getRelativeURL() {
@@ -37,7 +31,7 @@ public class DepositPage extends ParentPage {
         return this;
     }
 
-    public DepositPage clickOnDepositButton() {
+    public DepositPage clickOnDepositSubmitButton() {
         clickOnElement(depositButton);
         return this;
     }
@@ -55,26 +49,8 @@ public class DepositPage extends ParentPage {
         return this;
     }
 
-    public String[] getDataFromDepositHeader() {
-        List<WebElement> values = webDriver.findElements(By.xpath(depositData));
-        String[] arrayDataOfDeposit = new String[values.size()];
-        for (int i = 0; i < values.size(); i++) {
-            arrayDataOfDeposit[i] = values.get(i).getText();
-        }
-        return arrayDataOfDeposit;
-    }
-
     public String getAccountBalance() {
-        String[] arrayDataOfDeposit = getDataFromDepositHeader();
-        return arrayDataOfDeposit[1];
-
+        return getDataFromSameXpathToStringArray(accountData)[1];
     }
-
-    public TransactionListPage clickOnTransactionButton() {
-        clickOnElement(transactionButton);
-        return new TransactionListPage(webDriver);
-    }
-
-
 }
 

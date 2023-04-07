@@ -16,9 +16,6 @@ public class OpenAccountPage extends ParentPage {
     @FindBy(xpath = ".//button[@type='submit']")
     private WebElement processButton;
 
-    @FindBy(xpath = ".//button[@ng-class='btnClass3']")
-    public WebElement customersButton;
-
     @Override
     String getRelativeURL() {
         return "/manager/openAccount";
@@ -47,10 +44,5 @@ public class OpenAccountPage extends ParentPage {
         Assert.assertTrue("Open Account Page is not loaded", customersDropDown.isDisplayed());
         checkUrl();
         return this;
-    }
-
-    public CustomersListPage clickOnCustomers() {
-        clickOnElement(customersButton);
-        return new CustomersListPage(webDriver);
     }
 }
